@@ -57,7 +57,7 @@ public class Console {
         }
 
         System.out.println("Your array: " + Arrays.toString(currentArray));
-
+        state = ConsoleState.ARRAY_INITIALIZED;
         return ReturnCode.OK;
     }
 
