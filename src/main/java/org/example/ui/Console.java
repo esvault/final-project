@@ -1,5 +1,8 @@
 package org.example.ui;
 
+import org.example.algorithms.BinarySearch;
+import org.example.algorithms.InsertionSort;
+import org.example.algorithms.SortingStrategy;
 import org.example.enums.ConsoleState;
 import org.example.enums.ReturnCode;
 import org.example.model.*;
@@ -13,22 +16,13 @@ public class Console {
     private FillStrategy fillStrategy;
 
     public void runMainLoop() {
-        ReturnCode commandResult;
 
         mainLoop:
         while (true) {
             switch (state) {
-                case NO_ARRAY -> {
-                    commandResult = fillArray();
-                    if (commandResult == ReturnCode.OK)
-                        state = ConsoleState.ARRAY_INITIALIZED;
-                }
-                case ARRAY_INITIALIZED -> {
-                    commandResult = askAction();
-                }
-                case ARRAY_SORTED -> {
-                    commandResult = askAction();
-                }
+                case NO_ARRAY -> fillArray();
+                case ARRAY_INITIALIZED, ARRAY_SORTED -> askAction();
+
                 case EXIT -> {
                     break mainLoop;
                 }
@@ -74,7 +68,25 @@ public class Console {
 
         switch (askResponse) {
             case 1: {
-                // выполнить сортировку
+                if (state == ConsoleState.NO_ARRAY) {
+                    System.out.println("Array must be filled");
+                    return ReturnCode.ERROR;
+                }
+
+                if (currentArray[0] instanceof Animal) {
+                    SortingStrategy<Animal> ss = new InsertionSort<>();
+                    ss.sort((Animal[]) currentArray);
+                } else if (currentArray[0] instanceof Barrel) {
+                    SortingStrategy<Barrel> ss = new InsertionSort<>();
+                    ss.sort((Barrel[]) currentArray);
+                } else if (currentArray[0] instanceof Human) {
+                    SortingStrategy<Human> ss = new InsertionSort<>();
+                    ss.sort((Human[]) currentArray);
+                } else {
+                    System.out.println("Unsupported type");
+                    return ReturnCode.ERROR;
+                }
+
                 state = ConsoleState.ARRAY_SORTED;
                 break;
             }
@@ -84,6 +96,8 @@ public class Console {
                     return ReturnCode.ERROR;
                 }
                 // выполнить бинарный поиск
+                System.out.println("Enter element to be search");
+//                BinarySearch.search(currentArray, )
                 break;
             }
             case 3: {
