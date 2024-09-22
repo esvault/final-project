@@ -1,5 +1,9 @@
 package org.example.model;
 
+import org.example.entity.Animal;
+import org.example.entity.Barrel;
+import org.example.entity.Human;
+
 //TODO Implement class
 public class FileFillStrategy implements FillStrategy {
     @Override
