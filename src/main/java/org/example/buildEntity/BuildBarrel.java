@@ -2,24 +2,20 @@ package org.example.buildEntity;
 
 import org.example.entity.Barrel;
 
-public class BuildBarrel implements Builder {
+public class BuildBarrel  {
     private int volume;
     private String content;
     private String material;
 
-
-    @Override
-    public void setFirstParam(String volume) {
-        this.volume = Integer.parseInt(volume);
+    public void setVolume(int volume) {
+        this.volume = volume;
     }
 
-    @Override
-    public void setSecondParam(String content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    @Override
-    public void setLastParam(String material) {
+    public void setMaterial(String material) {
         this.material = material;
     }
 
