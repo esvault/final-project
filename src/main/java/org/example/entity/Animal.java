@@ -26,7 +26,13 @@ public class Animal implements Comparable<Animal>, SupportedTypes {
 
     @Override
     public int compareTo(Animal o) {
-        return 0;
+        if (!species.equals(o.species)) {
+            return species.compareTo(o.species);
+        }
+        if (!eyeColor.equals(o.eyeColor)) {
+            return eyeColor.compareTo(o.eyeColor);
+        }
+        return Boolean.compare(wool, o.wool);
     }
 
     @Override
