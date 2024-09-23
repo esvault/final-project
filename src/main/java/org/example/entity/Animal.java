@@ -4,9 +4,9 @@ package org.example.entity;
 public class Animal implements Comparable<Animal>, SupportedTypes {
     private final String species;
     private final String eyeColor;
-    private final String wool;
+    private final Boolean wool;
 
-    public Animal(String species, String eyeColor, String wool) {
+    public Animal(String species, String eyeColor, Boolean wool) {
         this.species = species;
         this.eyeColor = eyeColor;
         this.wool = wool;
@@ -20,7 +20,7 @@ public class Animal implements Comparable<Animal>, SupportedTypes {
         return eyeColor;
     }
 
-    public String getWool() {
+    public Boolean getWool() {
         return wool;
     }
 
