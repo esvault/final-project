@@ -1,5 +1,9 @@
 package org.example.model;
 
+import org.example.entity.Animal;
+import org.example.entity.Barrel;
+import org.example.entity.Human;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,10 +35,10 @@ public class FileFillStrategy implements FillStrategy {
 
         for(int i=0;i<animals.length;i++){
             var temp = (LinkedHashMap<String,String>)array[i];
-            Animal animal = new Animal();
-//            animal.setSpecies(temp.get("species"));
-//            animal.setEyeColor(temp.get("eyeColor"));
-//            animal.setWool(temp.get("wool"));
+            Animal animal = new Animal(temp.get("species"),temp.get("eyeColor"),temp.get("wool"));
+//            animal.setSpecies();
+//            animal.setEyeColor();
+//            animal.setWool();
             animals[i] = animal;
         }
         return animals;

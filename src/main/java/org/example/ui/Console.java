@@ -1,8 +1,11 @@
 package org.example.ui;
 
-import org.example.algorithms.BinarySearch;
 import org.example.algorithms.InsertionSort;
 import org.example.algorithms.SortingStrategy;
+import org.example.entity.Animal;
+import org.example.entity.Barrel;
+import org.example.entity.Human;
+import org.example.entity.SupportedTypes;
 import org.example.enums.ConsoleState;
 import org.example.enums.ReturnCode;
 import org.example.model.*;
@@ -14,6 +17,7 @@ public class Console {
     private ConsoleState state = ConsoleState.NO_ARRAY;
     private SupportedTypes[] currentArray;
     private FillStrategy fillStrategy;
+
 
     public void runMainLoop() {
 
