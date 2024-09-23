@@ -19,18 +19,15 @@ public class DirectorRandom {
             builder.setSpecies(animalSpecies[rand.nextInt(animalSpecies.length)]);
             builder.setEyeColor(animalEyeColor[rand.nextInt(animalEyeColor.length)]);
             builder.setWool(animalWool[rand.nextInt(animalWool.length)]);
-            builder.createAnimal();
     }
     public void createRandomBarrel(BuildBarrel builder) {
             builder.setVolume(rand.nextInt(6));
             builder.setContent(barrelContent[rand.nextInt(barrelContent.length)]);
             builder.setMaterial(barrelMaterial[rand.nextInt(barrelMaterial.length)]);
-            builder.createBarrel();
     }
     public void createRandomHuman(BuildHuman builder) {
             builder.setGender(humanGender[rand.nextInt(humanGender.length)]);
             builder.setAge(rand.nextInt(100));
             builder.setSurname(humanSurname[rand.nextInt(humanSurname.length)]);
-            builder.createHuman();
     }
 }

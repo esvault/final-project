@@ -13,7 +13,6 @@ public class Director {
             builder.setSpecies(scanner.nextLine());
             builder.setEyeColor(scanner.nextLine());
             builder.setWool(scanner.nextLine());
-            builder.createAnimal();
         }
     }
     public void createBarrel(BuildBarrel builder) {
@@ -21,7 +20,6 @@ public class Director {
             builder.setVolume(scanner.nextInt());
             builder.setContent(scanner.nextLine());
             builder.setMaterial(scanner.nextLine());
-            builder.createBarrel();
         }
     }
     public void createHuman(BuildHuman builder) {
@@ -29,7 +27,6 @@ public class Director {
             builder.setGender(scanner.nextLine());
             builder.setAge(scanner.nextInt());
             builder.setSurname(scanner.nextLine());
-            builder.createHuman();
         }
     }
 }
