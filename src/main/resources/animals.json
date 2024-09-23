@@ -1,0 +1,17 @@
+[
+  {
+    "species": "cat",
+    "eyeColor": "blue",
+    "wool": "true"
+  },
+  {
+    "species": "dog",
+    "eyeColor": "brown",
+    "wool": "true"
+  },
+  {
+    "species": "cat",
+    "eyeColor": "blue",
+    "wool": "true"
+  }
+]

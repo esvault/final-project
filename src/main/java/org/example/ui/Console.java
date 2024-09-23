@@ -39,7 +39,7 @@ public class Console {
 
         switch (userResponse) {
             case 1: fillStrategy = new RandomFillStrategy(); break;
-            case 2: fillStrategy = new FileFillStrategy(); break;
+            case 2: fillStrategy = new FileFillStrategy("C:\\Users\\Lena\\Documents\\GitHub\\final-project\\src\\main\\resources\\animals.json",5); break;
             case 3: fillStrategy = new UserFillStrategy(); break;
 
             default: throw new IllegalArgumentException("Несуществующая команда");
