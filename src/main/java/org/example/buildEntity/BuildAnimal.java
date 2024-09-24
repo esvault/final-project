@@ -5,7 +5,8 @@ import org.example.entity.Animal;
 public class BuildAnimal  {
     private String species;
     private String eyeColor;
-    private String wool;
+    // private String wool;
+    private boolean wool;
 
 
     public void setSpecies(String species) {
@@ -18,7 +19,7 @@ public class BuildAnimal  {
     }
 
 
-    public void setWool(String wool) {
+    public void setWool(boolean wool) {
         this.wool = wool;
     }
 

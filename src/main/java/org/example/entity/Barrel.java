@@ -25,17 +25,22 @@ public class Barrel implements Comparable<Barrel>, SupportedTypes {
     }
 
     @Override
+    public int compareTo(Barrel o) {
+        if (volume != o.volume) {
+            return volume - o.volume;
+        }
+        if (content.equals(o.content)) {
+            return content.compareTo(o.content);
+        }
+        return material.compareTo(o.material);
+    }
+
+    @Override
     public String toString() {
         return "Barrel{" +
                 "volume=" + volume +
                 ", content='" + content + '\'' +
                 ", material='" + material + '\'' +
                 '}';
-    }
-
-
-    @Override
-    public int compareTo(Barrel o) {
-        return 0;
     }
 }
