@@ -18,7 +18,8 @@ public class DirectorRandom {
     public void createRandomAnimal(BuildAnimal builder){
             builder.setSpecies(animalSpecies[rand.nextInt(animalSpecies.length)]);
             builder.setEyeColor(animalEyeColor[rand.nextInt(animalEyeColor.length)]);
-            builder.setWool(animalWool[rand.nextInt(animalWool.length)]);
+//            builder.setWool(animalWool[rand.nextInt(animalWool.length)]);
+            builder.setWool(rand.nextInt(10) > 5);
     }
     public void createRandomBarrel(BuildBarrel builder) {
             builder.setVolume(rand.nextInt(6));

@@ -1,9 +1,14 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 //TODO Implement class
 public class Barrel implements Comparable<Barrel>, SupportedTypes {
+    @JsonSetter("volume")
     private final int volume;
+    @JsonSetter("content")
     private final String content;
+    @JsonSetter("material")
     private final String material;
 
     public Barrel(int volume, String content, String material) {

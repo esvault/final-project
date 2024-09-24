@@ -1,0 +1,102 @@
+[
+  {
+    "gender" : "male",
+    "age": 20,
+    "surname" : "Hvorostovsky"
+  },
+  {
+    "gender" : "male",
+    "age": 37,
+    "surname" : "Bunin"
+  },
+  {
+    "gender" : "female",
+    "age": 18,
+    "surname" : "Tsvetaeva"
+  },
+  {
+    "gender" : "male",
+    "age": 45,
+    "surname" : "Tsiolkovskii"
+  },
+  {
+    "gender" : "female",
+    "age": 65,
+    "surname" : "Akhmatova"
+  },
+  {
+    "gender" : "male",
+    "age": 32,
+    "surname" : "Chapayev"
+  },
+  {
+    "gender" : "male",
+    "age": 70,
+    "surname" : "Lukyanenko"
+  },
+  {
+    "gender" : "male",
+    "age": 27,
+    "surname" : "Sholokhov"
+  },
+  {
+    "gender" : "male",
+    "age": 61,
+    "surname" : "Tarkovsky"
+  },
+  {
+    "gender" : "female",
+    "age": 39,
+    "surname" : "Larina"
+  },
+  {
+    "gender" : "male",
+    "age": 40,
+    "surname" : "Paustovskiy"
+  },
+  {
+    "gender" : "male",
+    "age": 72,
+    "surname" : "Krylov"
+  },
+  {
+    "gender" : "female",
+    "age": 23,
+    "surname" : "Ustinova"
+  },
+  {
+    "gender" : "male",
+    "age": 34,
+    "surname" : "Romanov"
+  },
+  {
+    "gender" : "male",
+    "age": 28,
+    "surname" : "Suvorov"
+  },
+  {
+    "gender" : "female",
+    "age": 29,
+    "surname" : "Dostoevskaya"
+  },
+  {
+    "gender" : "female",
+    "age": 55,
+    "surname" : "Tolstaya"
+  },
+  {
+    "gender" : "male",
+    "age": 43,
+    "surname" : "Dovlatov"
+  },
+  {
+    "gender" : "male",
+    "age": 74,
+    "surname" : "Goncharov"
+  },
+  {
+    "gender" : "female",
+    "age": 62,
+    "surname" : "Pushkina"
+  }
+]
