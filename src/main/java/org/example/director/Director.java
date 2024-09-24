@@ -12,7 +12,7 @@ public class Director {
         try (Scanner scanner = new Scanner(System.in)) {
             builder.setSpecies(scanner.nextLine());
             builder.setEyeColor(scanner.nextLine());
-            builder.setWool(scanner.nextLine());
+            builder.setWool(scanner.nextBoolean());
         }
     }
     public void createBarrel(BuildBarrel builder) {
