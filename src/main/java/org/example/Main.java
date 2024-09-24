@@ -9,9 +9,9 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        //(new Console()).runMainLoop();
-        RandomFillStrategy randomFillStrategy = new RandomFillStrategy();
-        System.out.println(Arrays.toString(randomFillStrategy.fillArrayByAnimals()));
+        (new Console()).runMainLoop();
+//        RandomFillStrategy randomFillStrategy = new RandomFillStrategy();
+//        System.out.println(Arrays.toString(randomFillStrategy.fillArrayByAnimals()));
 
     }
 }

@@ -1,5 +1,8 @@
 package org.example.model;
 
+import org.example.buildEntity.BuildAnimal;
+import org.example.buildEntity.BuildBarrel;
+import org.example.buildEntity.BuildHuman;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
@@ -18,37 +21,47 @@ public class FileFillStrategy implements FillStrategy {
     public FileFillStrategy(File file)  {
         this.file = file;
     }
+
     @Override
     public Animal[] fillArrayByAnimals()  {
+        BuildAnimal builder = new BuildAnimal();
         var array = mapArrayFromJson();
         Animal[] animals = new Animal[array.length];
         for(int i=0;i<animals.length;i++){
             var temp = (LinkedHashMap<String,String>)array[i];
-            Animal animal = new Animal(temp.get("species"),temp.get("eyeColor"),Boolean.parseBoolean(temp.get("wool")));
-            animals[i] = animal;
+            builder.setEyeColor(temp.get("eyeColor"));
+            builder.setSpecies(temp.get("species"));
+            builder.setWool(Boolean.parseBoolean(temp.get("wool")));
+            animals[i] = builder.createAnimal();
         }
         return animals;
     }
     @Override
     public Barrel[] fillArrayByBarrels() {
+        BuildBarrel builder = new BuildBarrel();
         var array = mapArrayFromJson();
         Barrel[] barrels = new Barrel[array.length];
         for(int i=0;i<barrels.length;i++){
             var temp = (LinkedHashMap)array[i];
-            Barrel barrel = new Barrel(Integer.parseInt(temp.get("volume").toString()),temp.get("content").toString(),temp.get("material").toString());
-            barrels[i] = barrel;
+            builder.setVolume(Integer.parseInt(temp.get("volume").toString()));
+            builder.setContent(temp.get("content").toString());
+            builder.setMaterial(temp.get("material").toString());
+            barrels[i] = builder.createBarrel();
         }
         return barrels;
     }
 
     @Override
     public Human[] fillArrayByHumans()  {
+        BuildHuman builder = new BuildHuman();
         var array = mapArrayFromJson();
         Human[] humans = new Human[array.length];
         for(int i=0;i<humans.length;i++){
             var temp = (LinkedHashMap)array[i];
-            Human human = new Human(temp.get("gender").toString(),Integer.parseInt(temp.get("age").toString()),temp.get("surname").toString());
-            humans[i] = human;
+            builder.setGender(temp.get("gender").toString());
+            builder.setAge(Integer.parseInt(temp.get("age").toString()));
+            builder.setSurname(temp.get("surname").toString());
+            humans[i] = builder.createHuman();
         }
         return humans;
     }
