@@ -4,11 +4,8 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 //TODO Implement class
 public class Human implements Comparable<Human>, SupportedTypes {
-    @JsonSetter("gender")
     private final String gender;
-    @JsonSetter("age")
     private final int age;
-    @JsonSetter("surname")
     private final String surname;
 
     public Human(String gender, int age, String surname) {

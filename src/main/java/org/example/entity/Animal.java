@@ -4,11 +4,8 @@ import org.example.entity.SupportedTypes;
 
 //TODO Implement class
 public class Animal implements Comparable<Animal>, SupportedTypes {
-    @JsonSetter("species")
     private final String species;
-    @JsonSetter("eyeColor")
     private final String eyeColor;
-    @JsonSetter("wool")
     private final Boolean wool;
 
     public Animal(String species, String eyeColor, Boolean wool) {
