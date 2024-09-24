@@ -8,7 +8,7 @@ import java.util.Random;
 public class DirectorRandom {
     String[] animalSpecies = {"kat","dog","cow","snake"};
     String[] animalEyeColor = {"blue","black","gray","green"};
-    String[] animalWool = {"long","short","not","feather"};
+    // String[] animalWool = {"long","short","not","feather"};
     String[] barrelContent = {"long","short","not","feather"};
     String[] barrelMaterial = {"long","short","not","feather"};
     String[] humanGender = {"Apache combat helicopter","male","female","it"};
@@ -18,7 +18,8 @@ public class DirectorRandom {
     public void createRandomAnimal(BuildAnimal builder){
             builder.setSpecies(animalSpecies[rand.nextInt(animalSpecies.length)]);
             builder.setEyeColor(animalEyeColor[rand.nextInt(animalEyeColor.length)]);
-            builder.setWool(animalWool[rand.nextInt(animalWool.length)]);
+            // builder.setWool(animalWool[rand.nextInt(animalWool.length)]);
+            builder.setWool(rand.nextInt(10) > 5);
     }
     public void createRandomBarrel(BuildBarrel builder) {
             builder.setVolume(rand.nextInt(6));
