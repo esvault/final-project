@@ -4,10 +4,8 @@ import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
 
-import java.io.IOException;
-
 public interface FillStrategy {
-    Animal[] fillArrayByAnimals() ;
+    Animal[] fillArrayByAnimals();
     Barrel[] fillArrayByBarrels();
-    Human[] fillArrayByHumans() ;
+    Human[] fillArrayByHumans();
 }

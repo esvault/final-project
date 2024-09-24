@@ -40,6 +40,7 @@ public class FileFillStrategy implements FillStrategy {
         }
         return barrels;
     }
+
     @Override
     public Human[] fillArrayByHumans()  {
         var array = mapArrayFromJson();

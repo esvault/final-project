@@ -1,7 +1,5 @@
 package org.example.entity;
 
-import com.fasterxml.jackson.annotation.JsonSetter;
-
 //TODO Implement class
 public class Human implements Comparable<Human>, SupportedTypes {
     private final String gender;
@@ -26,6 +24,16 @@ public class Human implements Comparable<Human>, SupportedTypes {
         return surname;
     }
 
+    @Override
+    public int compareTo(Human o) {
+        if (gender.equals(o.gender)) {
+            return gender.compareTo(o.gender);
+        }
+        if (age != o.age) {
+            return age - o.age;
+        }
+        return surname.compareTo(o.surname);
+    }
 
     @Override
     public String toString() {
@@ -34,10 +42,5 @@ public class Human implements Comparable<Human>, SupportedTypes {
                 ", age=" + age +
                 ", surname='" + surname + '\'' +
                 '}';
-    }
-
-    @Override
-    public int compareTo(Human o) {
-        return 0;
     }
 }
