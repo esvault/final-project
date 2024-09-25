@@ -18,40 +18,37 @@ public class UserFillStrategy implements FillStrategy {
     @Override
     public Animal[] fillArrayByAnimals() {
         Animal[] animals;
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = new Scanner(System.in);
             System.out.println("Введите количество создоваемых элементов");
             animals = new Animal[scanner.nextInt()];
-            for (int i = 0; i < animals.length; i++) {
+        for (int i = 0; i < animals.length; i++) {
                 director.createAnimal(buildAnimal);
                 animals[i] = buildAnimal.createAnimal();
             }
             return animals;
-        }
     }
     @Override
     public Barrel[] fillArrayByBarrels() {
         Barrel[] barrels;
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = new Scanner(System.in) ;
             System.out.println("Введите количество создоваемых элементов");
             barrels = new Barrel[scanner.nextInt()];
-            for (int i = 0; i < barrels.length; i++) {
+        for (int i = 0; i < barrels.length; i++) {
                 director.createBarrel(buildBarrel);
                 barrels[i] = buildBarrel.createBarrel();
             }
-        }
         return barrels;
     }
     @Override
     public Human[] fillArrayByHumans() {
         Human[] humans;
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = new Scanner(System.in);
             System.out.println("Введите количество создоваемых элементов");
             humans = new Human[scanner.nextInt()];
-            for (int i = 0; i < humans.length; i++) {
+        for (int i = 0; i < humans.length; i++) {
                 director.createHuman(buildHuman);
                 humans[i] = buildHuman.createHuman();
             }
-        }
         return humans;
     }
 }
