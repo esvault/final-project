@@ -15,15 +15,13 @@ public final class Validator {
         return true;
     }
     public static boolean validateAge(String age){
-        if(age ==null || age.isEmpty() || !age.matches("(^[1-9]+[0-9]*$)")){
+        if(!age.matches("^(100|[1-9][0-9]?)$")){
             return false;
         }
-        var num = Integer.parseInt(age);
-        var result = validateAge(num);
-        return result;
+        return true;
     }
     public static boolean validateSurname(String s){
-        String regex = "(([A-Z]{1})([a-z]{1,18})|([А-ЯЁ]{1})([а-яё]{1,18}))-?(([A-Z]{1})([a-z]{1,18})|([А-ЯЁ]{1})([а-яё]{1,18}))?";
+        String regex = "(([A-Z]{1})([a-z]{1,50})|([А-ЯЁ]{1})([а-яё]{1,50}))-?(([A-Z]{1})([a-z]{1,50})|([А-ЯЁ]{1})([а-яё]{1,50}))?";
         if(s ==null || s.isEmpty() ||
                 !s.matches(regex)){
             return false;
