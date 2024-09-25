@@ -3,7 +3,7 @@ package org.example.utils;
 public final class Validator {
     private Validator(){}
     public static boolean containsOnlyLetters(String s){
-        if(s ==null || s.isEmpty() ||  !s.matches("([а-яёА-ЯЁ]{1,})|([a-zA-Z]{1,})")){
+        if(s ==null || s.isEmpty() ||  !s.matches("([а\\-яё]{1,50})|([А\\-ЯЁ]{1,50})|([a-zA-Z]{1,50})")){
             return false;
         }
         return true;
@@ -21,7 +21,7 @@ public final class Validator {
         return true;
     }
     public static boolean validateSurname(String s){
-        String regex = "(([A-Z]{1})([a-z]{1,50})|([А-ЯЁ]{1})([а-яё]{1,50}))-?(([A-Z]{1})([a-z]{1,50})|([А-ЯЁ]{1})([а-яё]{1,50}))?";
+        String regex = "(([A-Z]([a-z]{1,50}))|([А\\-Я]([а\\-я]{1,50})))";
         if(s ==null || s.isEmpty() ||
                 !s.matches(regex)){
             return false;
@@ -48,6 +48,12 @@ public final class Validator {
         }
         bool = bool.toLowerCase();
         if(!bool.matches("^(?:yes|no|true|false)")){
+            return false;
+        }
+        return true;
+    }
+    public static boolean validateUserChoice(String num){
+        if(num ==null || num.isEmpty() || !num.matches("^[123]$")){
             return false;
         }
         return true;
