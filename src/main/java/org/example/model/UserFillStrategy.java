@@ -30,7 +30,7 @@ public class UserFillStrategy implements FillStrategy {
         for (int i = 0; i < arrayLen; i++) {
             builder.setSpecies(validateStringInput("Введите вид животного: "));
             builder.setEyeColor(validateStringInput("Введите цвет глаз: "));
-            builder.setWool(validateBooleanInput("Есть ли шерсть? (да/нет): "));
+            builder.setWool(validateBooleanInput("Есть ли шерсть? (yes/no): "));
             animals[i] = builder.createAnimal();
         }
         return animals;
@@ -95,10 +95,10 @@ public class UserFillStrategy implements FillStrategy {
     private boolean validateBooleanInput(String prompt) {
         System.out.print(prompt);
         String input = scanner.nextLine().toLowerCase();
-        while (!input.equals("да") && !input.equals("нет")) {
-            System.out.print("Некорректный ввод. Введите 'да' или 'нет': ");
+        while (!input.equals("yes") && !input.equals("no")) {
+            System.out.print("Некорректный ввод. Введите 'yes' или 'no': ");
             input = scanner.nextLine().toLowerCase();
         }
-        return input.equals("да");
+        return input.equals("yes");
     }
 }
