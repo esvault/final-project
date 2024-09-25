@@ -3,12 +3,9 @@ package org.example.director;
 import org.example.buildEntity.BuildAnimal;
 import org.example.buildEntity.BuildBarrel;
 import org.example.buildEntity.BuildHuman;
-import org.example.buildEntity.Builder;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
-
-import java.util.Scanner;
 
 public class Director {
     public Animal createAnimal(String species, String eyeColor, boolean wool){

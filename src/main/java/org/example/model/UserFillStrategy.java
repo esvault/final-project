@@ -1,9 +1,11 @@
 package org.example.model;
 
+import org.example.director.Director;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
 import org.example.buildEntity.*;
+import org.example.utils.Validator;
 
 import java.util.Scanner;
 
@@ -11,41 +13,41 @@ import java.util.Scanner;
 public class UserFillStrategy implements FillStrategy {
     private int arrayLen;
     private Scanner scanner;
+    private Director director;
 
     {
-        System.out.println("Enter length of array");
-        Scanner sc = new Scanner(System.in);
-        arrayLen = sc.nextInt();
-    }
+        scanner = new Scanner(System.in);
+        director = new Director();
 
-    public UserFillStrategy() {
-        this.scanner = new Scanner(System.in);
+        System.out.println("Enter length of array");
+        arrayLen = scanner.nextInt();
     }
 
     @Override
     public Animal[] fillArrayByAnimals() {
         Animal[] animals = new Animal[arrayLen];
-        BuildAnimal builder = new BuildAnimal();
 
         for (int i = 0; i < arrayLen; i++) {
-            builder.setSpecies(validateStringInput("Введите вид животного: "));
-            builder.setEyeColor(validateStringInput("Введите цвет глаз: "));
-            builder.setWool(validateBooleanInput("Есть ли шерсть? (да/нет): "));
-            animals[i] = builder.createAnimal();
+            String species = validateStringInput("Введите вид животного: ");
+            String eyeColor = validateStringInput("Введите цвет глаз: ");
+            boolean wool = validateBooleanInput("Есть ли шерсть? (да/нет): ");
+
+            animals[i] = director.createAnimal(species, eyeColor, wool);
         }
+
         return animals;
     }
 
     @Override
     public Barrel[] fillArrayByBarrels() {
         Barrel[] barrels = new Barrel[arrayLen];
-        BuildBarrel builder = new BuildBarrel();
 
         for (int i = 0; i < arrayLen; i++) {
-            builder.setVolume(validateIntInput("Введите объем бочки (в литрах): "));
-            builder.setContent(validateStringInput("Введите хранимый материал: "));
-            builder.setMaterial(validateStringInput("Введите материал, из которого изготовлена бочка: "));
-            barrels[i] = builder.createBarrel();
+            int volume = validateIntInput("Введите объем бочки (в литрах): ");
+            String content = validateStringInput("Введите хранимый материал: ");
+            String material = validateStringInput("Введите материал, из которого изготовлена бочка: ");
+
+            barrels[i] = director.createBarrel(volume, content, material);
         }
         return barrels;
     }
@@ -53,13 +55,13 @@ public class UserFillStrategy implements FillStrategy {
     @Override
     public Human[] fillArrayByHumans() {
         Human[] persons = new Human[arrayLen];
-        BuildHuman builder = new BuildHuman();
 
         for (int i = 0; i < arrayLen; i++) {
-            builder.setGender(validateStringInput("Введите пол: "));
-            builder.setAge(validateIntInput("Введите возраст: "));
-            builder.setSurname(validateStringInput("Введите фамилию: "));
-            persons[i] = builder.createHuman();
+            String gender = validateStringInput("Введите пол: ");
+            int age = validateIntInput("Введите возраст: ");
+            String surname = validateStringInput("Введите фамилию: ");
+
+            persons[i] = director.createHuman(gender, age, surname);
         }
         return persons;
     }
@@ -67,7 +69,7 @@ public class UserFillStrategy implements FillStrategy {
     private String validateStringInput(String prompt) {
         System.out.print(prompt);
         String input = scanner.nextLine();
-        while (input.trim().isEmpty()) {
+        while (Validator.containsOnlyLetters(input)) {
             System.out.print("Некорректный ввод. Попробуйте еще раз: ");
             input = scanner.nextLine();
         }
@@ -95,10 +97,10 @@ public class UserFillStrategy implements FillStrategy {
     private boolean validateBooleanInput(String prompt) {
         System.out.print(prompt);
         String input = scanner.nextLine().toLowerCase();
-        while (!input.equals("да") && !input.equals("нет")) {
-            System.out.print("Некорректный ввод. Введите 'да' или 'нет': ");
+        while (Validator.validateBoolean(input)) {
+            System.out.print("Некорректный ввод. Введите 'yes'/'no': ");
             input = scanner.nextLine().toLowerCase();
         }
-        return input.equals("да");
+        return input.equals("yes");
     }
 }
