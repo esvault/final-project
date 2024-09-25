@@ -1,0 +1,102 @@
+[
+  {
+    "species": "cat",
+    "eyeColor": "green",
+    "wool": "true"
+  },
+  {
+    "species": "dog",
+    "eyeColor": "blue",
+    "wool": "true"
+  },
+  {
+    "species": "elephant",
+    "eyeColor": "black",
+    "wool": "false"
+  },
+  {
+    "species": "giraffe",
+    "eyeColor": "black",
+    "wool": "true"
+  },
+  {
+    "species": "zebra",
+    "eyeColor": "black",
+    "wool": "true"
+  },
+  {
+  "species": "koala",
+  "eyeColor": "black",
+  "wool": "true"
+  },
+  {
+    "species": "lion",
+    "eyeColor": "brown",
+    "wool": "true"
+  },
+  {
+    "species": "hippopotamus",
+    "eyeColor": "black",
+    "wool": "false"
+  },
+  {
+    "species": "elk",
+    "eyeColor": "brown",
+    "wool": "true"
+  },
+  {
+    "species": "raccoon",
+    "eyeColor": "black",
+    "wool": "true"
+  },
+  {
+    "species": "skunk",
+    "eyeColor": "black",
+    "wool": "true"
+  },
+  {
+    "species": "bear",
+    "eyeColor": "black",
+    "wool": "true"
+  },
+  {
+    "species": "rhinoceros",
+    "eyeColor": "black",
+    "wool": "true"
+  },
+  {
+    "species": "fox",
+    "eyeColor": "brown",
+    "wool": "true"
+  },
+  {
+    "species": "tiger",
+    "eyeColor": "brown",
+    "wool": "yes"
+  },
+  {
+    "species": "lama",
+    "eyeColor": "black",
+    "wool": "true"
+  },
+  {
+    "species": "panda",
+    "eyeColor": "black",
+    "wool": "true"
+  },
+  {
+    "species": "cow",
+    "eyeColor": "brown",
+    "wool": "true"
+  },
+  {
+    "species": "chinchilla",
+    "eyeColor": "black",
+    "wool": "true"
+  },
+  {
+    "species": "capybara",
+    "eyeColor": "black",
+    "wool": "true"
+  }
+]

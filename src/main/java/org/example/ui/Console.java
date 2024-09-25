@@ -1,12 +1,16 @@
 package org.example.ui;
 
-import org.example.algorithms.BinarySearch;
 import org.example.algorithms.InsertionSort;
 import org.example.algorithms.SortingStrategy;
+import org.example.entity.Animal;
+import org.example.entity.Barrel;
+import org.example.entity.Human;
+import org.example.entity.SupportedTypes;
 import org.example.enums.ConsoleState;
 import org.example.enums.ReturnCode;
 import org.example.model.*;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -14,6 +18,7 @@ public class Console {
     private ConsoleState state = ConsoleState.NO_ARRAY;
     private SupportedTypes[] currentArray;
     private FillStrategy fillStrategy;
+
 
     public void runMainLoop() {
 
@@ -39,7 +44,22 @@ public class Console {
 
         switch (userResponse) {
             case 1: fillStrategy = new RandomFillStrategy(); break;
-            case 2: fillStrategy = new FileFillStrategy(); break;
+            case 2:
+                boolean isNotFound = true;
+                String filePath = null;
+                File file = null;
+                while (isNotFound){
+                    System.out.println("Enter file path");
+                    filePath = sc.next();
+                    file = new File(filePath);
+                    if(!file.exists()){
+                        System.out.println("Such file not found please try again");
+                        continue;
+                    }
+                    isNotFound = false;
+                }
+                fillStrategy = new FileFillStrategy(file);
+                break;
             case 3: fillStrategy = new UserFillStrategy(); break;
 
             default: throw new IllegalArgumentException("Несуществующая команда");
@@ -50,8 +70,8 @@ public class Console {
 
         switch (elementTypeCode) {
             case 1: currentArray = fillStrategy.fillArrayByAnimals(); break;
-//            case 2: currentArray = fillStrategy.fillArrayByBarrels(); break;
-//            case 3: currentArray = fillStrategy.fillArrayByHumans(); break;
+            case 2: currentArray = fillStrategy.fillArrayByBarrels(); break;
+            case 3: currentArray = fillStrategy.fillArrayByHumans(); break;
 
             default: throw new IllegalArgumentException("Несуществующий вариант ответа");
         }
