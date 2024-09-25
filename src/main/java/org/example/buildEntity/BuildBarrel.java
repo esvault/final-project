@@ -7,16 +7,19 @@ public class BuildBarrel  {
     private String content;
     private String material;
 
-    public void setVolume(int volume) {
+    public BuildBarrel setVolume(int volume) {
         this.volume = volume;
+        return this;
     }
 
-    public void setContent(String content) {
+    public BuildBarrel setContent(String content) {
         this.content = content;
+        return this;
     }
 
-    public void setMaterial(String material) {
+    public BuildBarrel setMaterial(String material) {
         this.material = material;
+        return this;
     }
 
     public Barrel createBarrel() {
