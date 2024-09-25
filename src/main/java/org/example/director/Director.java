@@ -3,7 +3,7 @@ package org.example.director;
 import org.example.buildEntity.BuildAnimal;
 import org.example.buildEntity.BuildBarrel;
 import org.example.buildEntity.BuildHuman;
-import org.example.buildEntity.Builder;
+
 
 import java.util.Scanner;
 
@@ -59,7 +59,7 @@ public class Director {
             String input = scanner.nextLine();
             while (!input.equalsIgnoreCase("да") && !input.equalsIgnoreCase("нет")) {
                 System.out.print("Некорректный ввод. Введите 'да' или 'нет': ");
-                input = scanner.nextLine().toLowerCase();
+                input = scanner.nextLine();
             }
 
             return input.equals("да");
