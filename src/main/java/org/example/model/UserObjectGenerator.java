@@ -19,7 +19,7 @@ public class UserObjectGenerator {
     public Animal generateAnimal() {
         String species = validateString("Введите вид животного: ");
         String eyeColor = validateString("Введите цвет глаз: ");
-        boolean wool = validateBooleanInput("Есть ли шерсть? (да/нет): ");
+        boolean wool = validateBooleanInput("Есть ли шерсть? (yes/no): ");
         return director.createAnimal(species, eyeColor, wool);
     }
 
@@ -81,9 +81,9 @@ public class UserObjectGenerator {
         System.out.print(prompt);
         String input = scanner.nextLine();
         while (!Validator.validateBoolean(input)) {
-            System.out.print("Некорректный ввод. Введите 'yes'/'no' or 'true'/'false': ");
+            System.out.print("Некорректный ввод. Введите 'yes'/'no': ");
             input = scanner.nextLine();
         }
-        return input.equals("yes") || input.equals("true");
+        return input.equals("yes");
     }
 }
