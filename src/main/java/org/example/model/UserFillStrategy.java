@@ -1,5 +1,6 @@
 package org.example.model;
 
+import org.example.director.Director;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
@@ -9,96 +10,48 @@ import java.util.Scanner;
 
 //TODO Implement class
 public class UserFillStrategy implements FillStrategy {
-    private int arrayLen;
-    private Scanner scanner;
 
-    {
-        System.out.println("Enter length of array");
-        Scanner sc = new Scanner(System.in);
-        arrayLen = sc.nextInt();
-    }
-
-    public UserFillStrategy() {
-        this.scanner = new Scanner(System.in);
-    }
-
+    Director director = new Director();
+    BuildAnimal buildAnimal = new BuildAnimal();
+    BuildBarrel buildBarrel = new BuildBarrel();
+    BuildHuman buildHuman = new BuildHuman();
     @Override
     public Animal[] fillArrayByAnimals() {
-        Animal[] animals = new Animal[arrayLen];
-        BuildAnimal builder = new BuildAnimal();
-
-        for (int i = 0; i < arrayLen; i++) {
-            builder.setSpecies(validateStringInput("Введите вид животного: "));
-            builder.setEyeColor(validateStringInput("Введите цвет глаз: "));
-            builder.setWool(validateBooleanInput("Есть ли шерсть? (да/нет): "));
-            animals[i] = builder.createAnimal();
+        Animal[] animals;
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Введите количество создоваемых элементов");
+            animals = new Animal[scanner.nextInt()];
+            for (int i = 0; i < animals.length; i++) {
+                director.createAnimal(buildAnimal);
+                animals[i] = buildAnimal.createAnimal();
+            }
+            return animals;
         }
-        return animals;
     }
-
     @Override
     public Barrel[] fillArrayByBarrels() {
-        Barrel[] barrels = new Barrel[arrayLen];
-        BuildBarrel builder = new BuildBarrel();
-
-        for (int i = 0; i < arrayLen; i++) {
-            builder.setVolume(validateIntInput("Введите объем бочки (в литрах): "));
-            builder.setContent(validateStringInput("Введите хранимый материал: "));
-            builder.setMaterial(validateStringInput("Введите материал, из которого изготовлена бочка: "));
-            barrels[i] = builder.createBarrel();
+        Barrel[] barrels;
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Введите количество создоваемых элементов");
+            barrels = new Barrel[scanner.nextInt()];
+            for (int i = 0; i < barrels.length; i++) {
+                director.createBarrel(buildBarrel);
+                barrels[i] = buildBarrel.createBarrel();
+            }
         }
         return barrels;
     }
-
     @Override
     public Human[] fillArrayByHumans() {
-        Human[] persons = new Human[arrayLen];
-        BuildHuman builder = new BuildHuman();
-
-        for (int i = 0; i < arrayLen; i++) {
-            builder.setGender(validateStringInput("Введите пол: "));
-            builder.setAge(validateIntInput("Введите возраст: "));
-            builder.setSurname(validateStringInput("Введите фамилию: "));
-            persons[i] = builder.createHuman();
-        }
-        return persons;
-    }
-
-    private String validateStringInput(String prompt) {
-        System.out.print(prompt);
-        String input = scanner.nextLine();
-        while (input.trim().isEmpty()) {
-            System.out.print("Некорректный ввод. Попробуйте еще раз: ");
-            input = scanner.nextLine();
-        }
-        return input;
-    }
-
-    private int validateIntInput(String prompt) {
-        int input = -1;
-        boolean valid = false;
-        while (!valid) {
-            System.out.print(prompt);
-            try {
-                input = Integer.parseInt(scanner.nextLine());
-                if (input < 0) {
-                    throw new NumberFormatException();
-                }
-                valid = true;
-            } catch (NumberFormatException e) {
-                System.out.print("Некорректный ввод. Введите положительное число: ");
+        Human[] humans;
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Введите количество создоваемых элементов");
+            humans = new Human[scanner.nextInt()];
+            for (int i = 0; i < humans.length; i++) {
+                director.createHuman(buildHuman);
+                humans[i] = buildHuman.createHuman();
             }
         }
-        return input;
-    }
-
-    private boolean validateBooleanInput(String prompt) {
-        System.out.print(prompt);
-        String input = scanner.nextLine().toLowerCase();
-        while (!input.equals("да") && !input.equals("нет")) {
-            System.out.print("Некорректный ввод. Введите 'да' или 'нет': ");
-            input = scanner.nextLine().toLowerCase();
-        }
-        return input.equals("да");
+        return humans;
     }
 }

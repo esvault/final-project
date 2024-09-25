@@ -8,15 +8,18 @@ import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
 
-import java.util.Random;
 import java.util.Scanner;
 
 //TODO Implement class
 public class RandomFillStrategy implements FillStrategy {
     DirectorRandom directorRandom = new DirectorRandom();
+    BuildAnimal buildAnimal = new BuildAnimal();
+    BuildBarrel buildBarrel = new BuildBarrel();
+    BuildHuman buildHuman = new BuildHuman();
+
     @Override
     public Animal[] fillArrayByAnimals() {
-        BuildAnimal buildAnimal = new BuildAnimal();
+
         Animal[] animals;
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("Введите количество создоваемых элементов");
@@ -32,7 +35,7 @@ public class RandomFillStrategy implements FillStrategy {
 
     @Override
     public Barrel[] fillArrayByBarrels() {
-        BuildBarrel buildBarrel = new BuildBarrel();
+
         Barrel[] barrels;
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("Введите количество создоваемых элементов");
@@ -47,7 +50,7 @@ public class RandomFillStrategy implements FillStrategy {
 
     @Override
     public Human[] fillArrayByHumans() {
-        BuildHuman buildHuman = new BuildHuman();
+
         Human[] humans;
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("Введите количество создоваемых элементов");
