@@ -10,16 +10,11 @@ import java.util.Scanner;
 //TODO Implement class
 public class UserFillStrategy implements FillStrategy {
     private int arrayLen;
-    private Scanner scanner;
 
     {
-        System.out.println("Enter length of array");
+        System.out.print("Введите количество создаваемых элементов > ");
         Scanner sc = new Scanner(System.in);
         arrayLen = sc.nextInt();
-    }
-
-    public UserFillStrategy() {
-        this.scanner = new Scanner(System.in);
     }
 
     @Override
@@ -64,8 +59,9 @@ public class UserFillStrategy implements FillStrategy {
         return persons;
     }
 
-    private String validateStringInput(String prompt) {
+    public static String validateStringInput(String prompt) {
         System.out.print(prompt);
+        Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         while (input.trim().isEmpty()) {
             System.out.print("Некорректный ввод. Попробуйте еще раз: ");
@@ -74,12 +70,13 @@ public class UserFillStrategy implements FillStrategy {
         return input;
     }
 
-    private int validateIntInput(String prompt) {
+    public static int validateIntInput(String prompt) {
         int input = -1;
         boolean valid = false;
         while (!valid) {
             System.out.print(prompt);
             try {
+                Scanner scanner = new Scanner(System.in);
                 input = Integer.parseInt(scanner.nextLine());
                 if (input < 0) {
                     throw new NumberFormatException();
@@ -92,8 +89,9 @@ public class UserFillStrategy implements FillStrategy {
         return input;
     }
 
-    private boolean validateBooleanInput(String prompt) {
+    public static boolean validateBooleanInput(String prompt) {
         System.out.print(prompt);
+        Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().toLowerCase();
         while (!input.equals("да") && !input.equals("нет")) {
             System.out.print("Некорректный ввод. Введите 'да' или 'нет': ");
