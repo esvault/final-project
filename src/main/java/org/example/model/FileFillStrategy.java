@@ -3,6 +3,7 @@ package org.example.model;
 import org.example.buildEntity.BuildAnimal;
 import org.example.buildEntity.BuildBarrel;
 import org.example.buildEntity.BuildHuman;
+import org.example.director.DirectorFile;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
@@ -10,42 +11,38 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 
 //TODO Implement class
 public class FileFillStrategy implements FillStrategy {
     private File file;
+    private DirectorFile directorFile ;
     public FileFillStrategy(File file)  {
         this.file = file;
     }
 
     @Override
     public Animal[] fillArrayByAnimals()  {
-        BuildAnimal builder = new BuildAnimal();
         var array = mapArrayFromJson();
+        directorFile =  new DirectorFile(array);
+        BuildAnimal builder = new BuildAnimal();
         Animal[] animals = new Animal[array.length];
-        for(int i=0;i<animals.length;i++){
-            var temp = (LinkedHashMap<String,String>)array[i];
-            builder.setEyeColor(temp.get("eyeColor"));
-            builder.setSpecies(temp.get("species"));
-            builder.setWool(Boolean.parseBoolean(temp.get("wool")));
+        for(int i=0;i<array.length;i++){
+            directorFile.createAnimal(builder);
             animals[i] = builder.createAnimal();
         }
         return animals;
     }
     @Override
     public Barrel[] fillArrayByBarrels() {
-        BuildBarrel builder = new BuildBarrel();
         var array = mapArrayFromJson();
+        directorFile =  new DirectorFile(array);
+        BuildBarrel builder = new BuildBarrel();
         Barrel[] barrels = new Barrel[array.length];
-        for(int i=0;i<barrels.length;i++){
-            var temp = (LinkedHashMap)array[i];
-            builder.setVolume(Integer.parseInt(temp.get("volume").toString()));
-            builder.setContent(temp.get("content").toString());
-            builder.setMaterial(temp.get("material").toString());
+
+        for(int i=0;i<array.length;i++){
+            directorFile.createBarrel(builder);
             barrels[i] = builder.createBarrel();
         }
         return barrels;
@@ -53,14 +50,13 @@ public class FileFillStrategy implements FillStrategy {
 
     @Override
     public Human[] fillArrayByHumans()  {
-        BuildHuman builder = new BuildHuman();
         var array = mapArrayFromJson();
+        directorFile =  new DirectorFile(array);
+        BuildHuman builder = new BuildHuman();
         Human[] humans = new Human[array.length];
+
         for(int i=0;i<humans.length;i++){
-            var temp = (LinkedHashMap)array[i];
-            builder.setGender(temp.get("gender").toString());
-            builder.setAge(Integer.parseInt(temp.get("age").toString()));
-            builder.setSurname(temp.get("surname").toString());
+            directorFile.createHuman(builder);
             humans[i] = builder.createHuman();
         }
         return humans;
