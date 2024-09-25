@@ -1,40 +1,32 @@
 package org.example.model;
 
-import org.example.director.Director;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
-
-import java.util.Random;
 import java.util.Scanner;
 
 //TODO Implement class
 public class RandomFillStrategy implements FillStrategy {
-    private final String[] animalSpecies = {"kat","dog","cow","snake"};
-    private final String[] animalEyeColor = {"blue","black","gray","green"};
-    private final String[] barrelContent = {"long","short","not","feather"};
-    private final String[] barrelMaterial = {"long","short","not","feather"};
-    private final String[] humanGender = {"Apache combat helicopter","male","female","it"};
-    private final String[]  humanSurname = {"long","short","not","feather"};
-    private final Random rand = new Random();
-    private int arrayLen = 0;
-    private Director director;
+    private final RandomObjectGenerator randomObjectGenerator;
+    private final int arrayLength;
 
-    {
-        System.out.println("Введите количество создаваемых элементов");
-        Scanner sc = new Scanner(System.in);
-        arrayLen = sc.nextInt();
+    public RandomFillStrategy() {
+        this.randomObjectGenerator = new RandomObjectGenerator();
+        this.arrayLength = getInputArrayLength();
+    }
+
+    private int getInputArrayLength() {
+        System.out.println("Введите количество создаваемых элементов:");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
     @Override
     public Animal[] fillArrayByAnimals() {
-        Animal[] animals = new Animal[arrayLen];
+        Animal[] animals = new Animal[arrayLength];
 
-        for (int i = 0; i < animals.length; i++) {
-            String species = animalSpecies[rand.nextInt(animalSpecies.length)];
-            String eyeColor = animalEyeColor[rand.nextInt(animalEyeColor.length)];
-            boolean wool = rand.nextInt(10) > 5;
-            animals[i] = director.createAnimal(species, eyeColor, wool);
+        for (int i = 0; i < arrayLength; i++) {
+            animals[i] = randomObjectGenerator.generateRandomAnimal();
         }
 
         return animals;
@@ -42,13 +34,10 @@ public class RandomFillStrategy implements FillStrategy {
 
     @Override
     public Barrel[] fillArrayByBarrels() {
-        Barrel[] barrels = new Barrel[arrayLen];
+        Barrel[] barrels = new Barrel[arrayLength];
 
-        for (int i = 0; i < barrels.length; i++) {
-            int volume = rand.nextInt(6);
-            String content = barrelContent[rand.nextInt(barrelContent.length)];
-            String material = barrelMaterial[rand.nextInt(barrelMaterial.length)];
-            barrels[i] = director.createBarrel(volume, content, material);
+        for (int i = 0; i < arrayLength; i++) {
+            barrels[i] = randomObjectGenerator.generateRandomBarrel();
         }
 
         return barrels;
@@ -56,13 +45,10 @@ public class RandomFillStrategy implements FillStrategy {
 
     @Override
     public Human[] fillArrayByHumans() {
-        Human[] humans = new Human[arrayLen];
+        Human[] humans = new Human[arrayLength];
 
-        for (int i = 0; i < humans.length; i++) {
-            String gender = humanGender[rand.nextInt(humanGender.length)];
-            int content = rand.nextInt(100);
-            String surname = humanSurname[rand.nextInt(humanSurname.length)];
-            humans[i] = director.createHuman(gender, content, surname);
+        for (int i = 0; i < arrayLength; i++) {
+            humans[i] = randomObjectGenerator.generateRandomHuman();
         }
 
         return humans;
