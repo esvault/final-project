@@ -18,7 +18,8 @@ public class RandomFillStrategy implements FillStrategy {
     public Animal[] fillArrayByAnimals() {
         BuildAnimal buildAnimal = new BuildAnimal();
         Animal[] animals;
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = new Scanner(System.in);
+        try {
             System.out.println("Введите количество создоваемых элементов");
             animals = new Animal[scanner.nextInt()];
             for (int i = 0; i < animals.length; i++) {
@@ -26,6 +27,8 @@ public class RandomFillStrategy implements FillStrategy {
                 animals[i] = buildAnimal.createAnimal();
             }
 
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return animals;
     }
@@ -34,13 +37,16 @@ public class RandomFillStrategy implements FillStrategy {
     public Barrel[] fillArrayByBarrels() {
         BuildBarrel buildBarrel = new BuildBarrel();
         Barrel[] barrels;
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = new Scanner(System.in);
+        try {
             System.out.println("Введите количество создоваемых элементов");
             barrels = new Barrel[scanner.nextInt()];
             for (int i = 0; i < barrels.length; i++) {
                 directorRandom.createRandomBarrel(buildBarrel);
                 barrels[i] = buildBarrel.createBarrel();
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return barrels;
     }
@@ -49,13 +55,16 @@ public class RandomFillStrategy implements FillStrategy {
     public Human[] fillArrayByHumans() {
         BuildHuman buildHuman = new BuildHuman();
         Human[] humans;
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = new Scanner(System.in);
+        try {
             System.out.println("Введите количество создоваемых элементов");
             humans = new Human[scanner.nextInt()];
             for (int i = 0; i < humans.length; i++) {
                 directorRandom.createRandomHuman(buildHuman);
                 humans[i] = buildHuman.createHuman();
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return humans;
     }
