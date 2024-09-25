@@ -1,7 +1,7 @@
 package org.example.entity;
 
 //TODO Implement class
-public class Human implements Comparable<Human>, SupportedTypes {
+public class Human implements SupportedTypes {
     private final String gender;
     private final int age;
     private final String surname;
@@ -25,14 +25,15 @@ public class Human implements Comparable<Human>, SupportedTypes {
     }
 
     @Override
-    public int compareTo(Human o) {
-        if (gender.equals(o.gender)) {
-            return gender.compareTo(o.gender);
+    public int compareTo(Object o) {
+        Human other = (Human) o;
+        if (!gender.equals(other.gender)) {
+            return gender.compareTo(other.gender);
         }
-        if (age != o.age) {
-            return age - o.age;
+        if (age != other.age) {
+            return age - other.age;
         }
-        return surname.compareTo(o.surname);
+        return surname.compareTo(other.surname);
     }
 
     @Override
