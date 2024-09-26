@@ -5,8 +5,8 @@ import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
 import org.example.utils.Validator;
-
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class UserObjectGenerator {
     private final Director director = new Director();
@@ -33,57 +33,38 @@ public class UserObjectGenerator {
     public Human generateHuman() {
         String gender = validateString("Введите пол: ");
         int age = validateAge("Введите возраст: ");
-        String surname = validateString("Введите фамилию: ");
+        String surname = validateSurname("Введите фамилию: ");
         return director.createHuman(gender, age, surname);
     }
 
     private String validateString(String prompt) {
-        System.out.print(prompt);
-        String input = scanner.nextLine();
-        while (!Validator.containsOnlyLetters(input)) {
-            System.out.print("Некорректный ввод. Попробуйте еще раз: ");
-            input = scanner.nextLine();
-        }
-        return input;
+        return validateInput(prompt, Validator::containsOnlyLetters);
     }
 
     private String validateSurname(String prompt) {
+        return validateInput(prompt, Validator::validateSurname);
+    }
+
+    private int validateVolume(String prompt) {
+        return Integer.parseInt(validateInput(prompt, Validator::validateVolume));
+    }
+
+    private int validateAge(String prompt) {
+        return Integer.parseInt(validateInput(prompt, Validator::validateAge));
+    }
+
+    private boolean validateBooleanInput(String prompt) {
+        return validateInput(prompt, Validator::validateBoolean).equals("yes");
+    }
+
+    // Predicate — функциональный интерфейс для проверки соблюдения некоторого условия.
+    private String validateInput(String prompt, Predicate<String> validator) {
         System.out.print(prompt);
         String input = scanner.nextLine();
-        while (!Validator.validateSurname(input)) {
+        while (!validator.test(input)) {
             System.out.print("Некорректный ввод. Попробуйте еще раз: ");
             input = scanner.nextLine();
         }
         return input;
-    }
-
-    private int validateVolume(String prompt) {
-        System.out.print(prompt);
-        String input = scanner.nextLine();
-        while (!Validator.validateVolume(input)) {
-            System.out.print("Некорректный ввод. Попробуйте еще раз: ");
-            input = scanner.nextLine();
-        }
-        return Integer.parseInt(input);
-    }
-
-    private int validateAge(String prompt) {
-        System.out.print(prompt);
-        String input = scanner.nextLine();
-        while (!Validator.validateAge(input)) {
-            System.out.print("Некорректный ввод. Попробуйте еще раз: ");
-            input = scanner.nextLine();
-        }
-        return Integer.parseInt(input);
-    }
-
-    private boolean validateBooleanInput(String prompt) {
-        System.out.print(prompt);
-        String input = scanner.nextLine();
-        while (!Validator.validateBoolean(input)) {
-            System.out.print("Некорректный ввод. Введите 'yes'/'no': ");
-            input = scanner.nextLine();
-        }
-        return input.equals("yes");
     }
 }
