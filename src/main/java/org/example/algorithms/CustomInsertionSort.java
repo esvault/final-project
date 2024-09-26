@@ -1,7 +1,6 @@
 package org.example.algorithms;
 
 import java.lang.reflect.Field;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,36 +27,42 @@ public class CustomInsertionSort<T> implements SortingStrategy<T> {
 
     @Override
     public void sort(T[] array) {
-        List<SimpleEntry<T, Integer>> evenValues = new ArrayList<>();
+        List<T> objectWithEvenValues = new ArrayList<>();
         int evenCount = 0;
 
         // Сбор пар объектов и их индексов, где значение поля четное
         for (int i = 0; i < array.length; i++) {
-            T current = array[i];
+            T currentObject = array[i];
             // Получаем значение поля для текущего объекта
-            Integer currentValue = getFieldValue(current);
+            Integer currentValue = getFieldValue(currentObject);
             if (currentValue % 2 == 0) {
-                evenValues.add(new SimpleEntry<>(current, i));
+                objectWithEvenValues.add(currentObject);
                 evenCount++;
             }
         }
 
-        // Сортировка четных значений с использованием сортировки вставками
-        for (int i = 1; i < evenCount; i++) {
-            Integer currentIndex = evenValues.get(i).getValue();
-            Integer current = getFieldValue(evenValues.get(i).getKey());
-            int j = i - 1;
-
-            while (j >= 0 && getFieldValue(evenValues.get(j).getKey()) > current) {
-                evenValues.get(j + 1).setValue(evenValues.get(j).getValue());
-                j--;
-            }
-            evenValues.get(j + 1).setValue(currentIndex);
+        if (objectWithEvenValues.size() < 2) {
+            return;
         }
 
+        // Сортировка четных значений с использованием сортировки вставками
+        for (int i = 1; i < evenCount; i++) {
+            T currentObject = objectWithEvenValues.get(i);
+            int j = i - 1;
+
+            while (j >= 0 && getFieldValue(objectWithEvenValues.get(j)) > getFieldValue(currentObject)) {
+                objectWithEvenValues.set(j + 1, objectWithEvenValues.get(j));
+                j = j - 1;
+            }
+            objectWithEvenValues.set(j + 1, currentObject);
+        }
+
+        evenCount = 0;
         // Вставка отсортированных четных значений обратно в исходный массив
-        for (SimpleEntry<T, Integer> pair : evenValues) {
-            array[pair.getValue()] = pair.getKey();
+        for (int i = 0; i < array.length; i++) {
+            if (getFieldValue(array[i]) % 2 == 0) {
+                array[i] = objectWithEvenValues.get(evenCount++);
+            }
         }
     }
 
