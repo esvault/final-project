@@ -3,15 +3,17 @@ package org.example.model;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
+import org.example.factory.RandomObjectFactory;
+
 import java.util.Scanner;
 
 //TODO Implement class
 public class RandomFillStrategy implements FillStrategy {
-    private final RandomObjectGenerator randomObjectGenerator;
+    private final RandomObjectFactory randomObjectGenerator;
     private final int arrayLength;
 
     public RandomFillStrategy() {
-        this.randomObjectGenerator = new RandomObjectGenerator();
+        this.randomObjectGenerator = new RandomObjectFactory();
         this.arrayLength = getInputArrayLength();
     }
 
@@ -26,7 +28,7 @@ public class RandomFillStrategy implements FillStrategy {
         Animal[] animals = new Animal[arrayLength];
 
         for (int i = 0; i < arrayLength; i++) {
-            animals[i] = randomObjectGenerator.generateRandomAnimal();
+            animals[i] = randomObjectGenerator.createAnimal();
         }
 
         return animals;
@@ -37,7 +39,7 @@ public class RandomFillStrategy implements FillStrategy {
         Barrel[] barrels = new Barrel[arrayLength];
 
         for (int i = 0; i < arrayLength; i++) {
-            barrels[i] = randomObjectGenerator.generateRandomBarrel();
+            barrels[i] = randomObjectGenerator.createBarrel();
         }
 
         return barrels;
@@ -48,7 +50,7 @@ public class RandomFillStrategy implements FillStrategy {
         Human[] humans = new Human[arrayLength];
 
         for (int i = 0; i < arrayLength; i++) {
-            humans[i] = randomObjectGenerator.generateRandomHuman();
+            humans[i] = randomObjectGenerator.createHuman();
         }
 
         return humans;

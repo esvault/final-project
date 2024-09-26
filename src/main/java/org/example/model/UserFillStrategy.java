@@ -3,16 +3,17 @@ package org.example.model;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
+import org.example.factory.UserObjectFactory;
 
 import java.util.Scanner;
 
 //TODO Implement class
 public class UserFillStrategy implements FillStrategy {
-    private final UserObjectGenerator userObjectGenerator;
+    private final UserObjectFactory userObjectGenerator;
     private final int arrayLength;
 
     public UserFillStrategy() {
-        this.userObjectGenerator = new UserObjectGenerator();
+        this.userObjectGenerator = new UserObjectFactory();
         this.arrayLength = getInputArrayLength();
     }
 
@@ -27,7 +28,7 @@ public class UserFillStrategy implements FillStrategy {
         Animal[] animals = new Animal[arrayLength];
 
         for (int i = 0; i < arrayLength; i++) {
-            animals[i] = userObjectGenerator.generateAnimal();
+            animals[i] = userObjectGenerator.createAnimal();
         }
 
         return animals;
@@ -39,7 +40,7 @@ public class UserFillStrategy implements FillStrategy {
 
         for (int i = 0; i < arrayLength; i++) {
 
-            barrels[i] = userObjectGenerator.generateBarrel();
+            barrels[i] = userObjectGenerator.createBarrel();
         }
         return barrels;
     }
@@ -49,7 +50,7 @@ public class UserFillStrategy implements FillStrategy {
         Human[] persons = new Human[arrayLength];
 
         for (int i = 0; i < arrayLength; i++) {
-            persons[i] = userObjectGenerator.generateHuman();
+            persons[i] = userObjectGenerator.createHuman();
         }
         return persons;
     }

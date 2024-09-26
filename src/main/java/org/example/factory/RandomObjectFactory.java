@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.factory;
 
 import org.example.director.Director;
 import org.example.entity.Animal;
@@ -6,7 +6,7 @@ import org.example.entity.Barrel;
 import org.example.entity.Human;
 import java.util.Random;
 
-public class RandomObjectGenerator {
+public class RandomObjectFactory implements ObjectFactory {
     private final String[] animalSpecies = {"cat", "dog", "cow", "snake"};
     private final String[] animalEyeColor = {"blue", "black", "gray", "green"};
     private final String[] barrelContents = {"long", "short", "not", "feather"};
@@ -16,21 +16,24 @@ public class RandomObjectGenerator {
     private final Director director = new Director();
     private final Random random = new Random();
 
-    public Animal generateRandomAnimal() {
+    @Override
+    public Animal createAnimal() {
         String species = getRandomFromArray(animalSpecies);
         String eyeColor = getRandomFromArray(animalEyeColor);
         boolean wool = random.nextBoolean();
         return director.createAnimal(species, eyeColor, wool);
     }
 
-    public Barrel generateRandomBarrel() {
+    @Override
+    public Barrel createBarrel() {
         int volume = random.nextInt(100);
         String content = getRandomFromArray(barrelContents);
         String material = getRandomFromArray(barrelMaterials);
         return director.createBarrel(volume, content, material);
     }
 
-    public Human generateRandomHuman() {
+    @Override
+    public Human createHuman() {
         String gender = getRandomFromArray(humanGenders);
         int age = random.nextInt(100);
         String surname = getRandomFromArray(humanSurnames);

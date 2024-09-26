@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.factory;
 
 import org.example.director.Director;
 import org.example.entity.Animal;
@@ -8,29 +8,32 @@ import org.example.utils.Validator;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
-public class UserObjectGenerator {
+public class UserObjectFactory implements ObjectFactory {
     private final Director director = new Director();
     private final Scanner scanner;
 
-    public UserObjectGenerator() {
+    public UserObjectFactory() {
         scanner = new Scanner(System.in);
     }
 
-    public Animal generateAnimal() {
+    @Override
+    public Animal createAnimal() {
         String species = validateString("Введите вид животного: ");
         String eyeColor = validateString("Введите цвет глаз: ");
         boolean wool = validateBooleanInput("Есть ли шерсть? (yes/no): ");
         return director.createAnimal(species, eyeColor, wool);
     }
 
-    public Barrel generateBarrel() {
+    @Override
+    public Barrel createBarrel() {
         int volume = validateVolume("Введите объем бочки (в литрах): ");
         String content = validateString("Введите хранимый материал: ");
         String material = validateString("Введите материал, из которого изготовлена бочка: ");
         return director.createBarrel(volume, content, material);
     }
 
-    public Human generateHuman() {
+    @Override
+    public Human createHuman() {
         String gender = validateString("Введите пол: ");
         int age = validateAge("Введите возраст: ");
         String surname = validateSurname("Введите фамилию: ");
