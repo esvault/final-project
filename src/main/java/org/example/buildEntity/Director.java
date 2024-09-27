@@ -1,8 +1,5 @@
-package org.example.director;
+package org.example.buildEntity;
 
-import org.example.buildEntity.BuildAnimal;
-import org.example.buildEntity.BuildBarrel;
-import org.example.buildEntity.BuildHuman;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;

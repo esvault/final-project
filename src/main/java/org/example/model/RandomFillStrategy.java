@@ -3,8 +3,9 @@ package org.example.model;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
-import org.example.factory.RandomObjectFactory;
+import org.example.buildEntity.RandomObjectFactory;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //TODO Implement class
@@ -20,7 +21,12 @@ public class RandomFillStrategy implements FillStrategy {
     private int getInputArrayLength() {
         System.out.println("Введите количество создаваемых элементов:");
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        try {
+            return scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Введите число");
+            return getInputArrayLength();
+        }
     }
 
     @Override

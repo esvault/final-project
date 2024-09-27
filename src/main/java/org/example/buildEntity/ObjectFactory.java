@@ -1,4 +1,4 @@
-package org.example.factory;
+package org.example.buildEntity;
 
 import org.example.entity.Animal;
 import org.example.entity.Barrel;

@@ -1,6 +1,6 @@
 package org.example.model;
 
-import org.example.director.Director;
+import org.example.buildEntity.Director;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
@@ -10,10 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.utils.Validator;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 
 //TODO Implement class
@@ -21,7 +18,21 @@ public class FileFillStrategy implements FillStrategy {
     private File file;
     private Director director = new Director();;
 
-    public FileFillStrategy(File file)  {
+    public FileFillStrategy()  {
+        Scanner sc = new Scanner(System.in);
+        boolean isNotFound = true;
+        String filePath = null;
+        File file = null;
+        while (isNotFound){
+            System.out.println("Введите путь к файлу");
+            filePath = sc.next();
+            file = new File(filePath);
+            if(!file.exists()){
+                System.out.println("Файл не найден, попробуйте другой");
+                continue;
+            }
+            isNotFound = false;
+        }
         this.file = file;
     }
 

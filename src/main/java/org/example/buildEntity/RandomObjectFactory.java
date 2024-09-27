@@ -1,6 +1,5 @@
-package org.example.factory;
+package org.example.buildEntity;
 
-import org.example.director.Director;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
