@@ -15,7 +15,7 @@ public class CustomInsertionSort<T> implements SortingStrategy<T> {
     }
 
     private Field findIntegerField(Class<T> clazz) {
-        // Ищем все поля в классе на наличие поля типа int (или Integer)
+
         for (Field field : clazz.getDeclaredFields()) {
             if (field.getType() == Integer.class || field.getType() == int.class) {
                 field.setAccessible(true);
