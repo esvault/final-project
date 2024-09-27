@@ -1,4 +1,4 @@
 package org.example.entity;
 
-public interface SupportedTypes {
+public interface SupportedTypes extends Comparable {
 }

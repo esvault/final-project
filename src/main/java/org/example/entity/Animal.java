@@ -1,7 +1,7 @@
 package org.example.entity;
 
 //TODO Implement class
-public class Animal implements Comparable<Animal>, SupportedTypes {
+public class Animal implements SupportedTypes {
     private final String species;
     private final String eyeColor;
     private final Boolean wool;
@@ -25,14 +25,15 @@ public class Animal implements Comparable<Animal>, SupportedTypes {
     }
 
     @Override
-    public int compareTo(Animal o) {
-        if (!species.equals(o.species)) {
-            return species.compareTo(o.species);
+    public int compareTo(Object o) {
+        Animal other = (Animal) o;
+        if (!species.equals(other.species)) {
+            return species.compareTo(other.species);
         }
-        if (!eyeColor.equals(o.eyeColor)) {
-            return eyeColor.compareTo(o.eyeColor);
+        if (!eyeColor.equals(other.eyeColor)) {
+            return eyeColor.compareTo(other.eyeColor);
         }
-        return Boolean.compare(wool, o.wool);
+        return Boolean.compare(wool, other.wool);
     }
 
     @Override
@@ -43,4 +44,5 @@ public class Animal implements Comparable<Animal>, SupportedTypes {
                 ", wool=" + wool +
                 '}';
     }
+
 }

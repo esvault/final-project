@@ -1,65 +1,65 @@
 package org.example.model;
 
-import org.example.buildEntity.BuildAnimal;
-import org.example.buildEntity.BuildBarrel;
-import org.example.buildEntity.BuildHuman;
-import org.example.director.DirectorRandom;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
+import org.example.buildEntity.RandomObjectFactory;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //TODO Implement class
 public class RandomFillStrategy implements FillStrategy {
-    DirectorRandom directorRandom = new DirectorRandom();
-    BuildAnimal buildAnimal = new BuildAnimal();
-    BuildBarrel buildBarrel = new BuildBarrel();
-    BuildHuman buildHuman = new BuildHuman();
+    private final RandomObjectFactory randomObjectGenerator;
+    private final int arrayLength;
+
+    public RandomFillStrategy() {
+        this.randomObjectGenerator = new RandomObjectFactory();
+        this.arrayLength = getInputArrayLength();
+    }
+
+    private int getInputArrayLength() {
+        System.out.println("Введите количество создаваемых элементов:");
+        Scanner scanner = new Scanner(System.in);
+        try {
+            return scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Введите число");
+            return getInputArrayLength();
+        }
+    }
 
     @Override
     public Animal[] fillArrayByAnimals() {
+        Animal[] animals = new Animal[arrayLength];
 
-        Animal[] animals;
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Введите количество создоваемых элементов");
-            animals = new Animal[scanner.nextInt()];
-            for (int i = 0; i < animals.length; i++) {
-                directorRandom.createRandomAnimal(buildAnimal);
-                animals[i] = buildAnimal.createAnimal();
-            }
-
+        for (int i = 0; i < arrayLength; i++) {
+            animals[i] = randomObjectGenerator.createAnimal();
         }
+
         return animals;
     }
 
     @Override
     public Barrel[] fillArrayByBarrels() {
+        Barrel[] barrels = new Barrel[arrayLength];
 
-        Barrel[] barrels;
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Введите количество создоваемых элементов");
-            barrels = new Barrel[scanner.nextInt()];
-            for (int i = 0; i < barrels.length; i++) {
-                directorRandom.createRandomBarrel(buildBarrel);
-                barrels[i] = buildBarrel.createBarrel();
-            }
+        for (int i = 0; i < arrayLength; i++) {
+            barrels[i] = randomObjectGenerator.createBarrel();
         }
+
         return barrels;
     }
 
     @Override
     public Human[] fillArrayByHumans() {
+        Human[] humans = new Human[arrayLength];
 
-        Human[] humans;
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Введите количество создоваемых элементов");
-            humans = new Human[scanner.nextInt()];
-            for (int i = 0; i < humans.length; i++) {
-                directorRandom.createRandomHuman(buildHuman);
-                humans[i] = buildHuman.createHuman();
-            }
+        for (int i = 0; i < arrayLength; i++) {
+            humans[i] = randomObjectGenerator.createHuman();
+
         }
+
         return humans;
     }
 }

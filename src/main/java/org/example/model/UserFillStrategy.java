@@ -1,54 +1,64 @@
 package org.example.model;
 
-import org.example.director.Director;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
-import org.example.buildEntity.*;
+import org.example.buildEntity.UserObjectFactory;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //TODO Implement class
 public class UserFillStrategy implements FillStrategy {
+    private final UserObjectFactory userObjectGenerator;
+    private final int arrayLength;
 
-    Director director = new Director();
-    BuildAnimal buildAnimal = new BuildAnimal();
-    BuildBarrel buildBarrel = new BuildBarrel();
-    BuildHuman buildHuman = new BuildHuman();
+    public UserFillStrategy() {
+        this.userObjectGenerator = new UserObjectFactory();
+        this.arrayLength = getInputArrayLength();
+    }
+
+    private int getInputArrayLength() {
+        System.out.println("Введите количество элементов:");
+        Scanner scanner = new Scanner(System.in);
+        try {
+            return scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Введите число");
+            return getInputArrayLength();
+        }
+    }
+
+
     @Override
     public Animal[] fillArrayByAnimals() {
-        Animal[] animals;
-        Scanner scanner = new Scanner(System.in);
-            System.out.println("Введите количество создоваемых элементов");
-            animals = new Animal[scanner.nextInt()];
-        for (int i = 0; i < animals.length; i++) {
-                director.createAnimal(buildAnimal);
-                animals[i] = buildAnimal.createAnimal();
-            }
-            return animals;
+        Animal[] animals = new Animal[arrayLength];
+
+        for (int i = 0; i < arrayLength; i++) {
+            animals[i] = userObjectGenerator.createAnimal();
+        }
+
+        return animals;
     }
+
     @Override
     public Barrel[] fillArrayByBarrels() {
-        Barrel[] barrels;
-        Scanner scanner = new Scanner(System.in) ;
-            System.out.println("Введите количество создоваемых элементов");
-            barrels = new Barrel[scanner.nextInt()];
-        for (int i = 0; i < barrels.length; i++) {
-                director.createBarrel(buildBarrel);
-                barrels[i] = buildBarrel.createBarrel();
-            }
+        Barrel[] barrels = new Barrel[arrayLength];
+
+        for (int i = 0; i < arrayLength; i++) {
+
+            barrels[i] = userObjectGenerator.createBarrel();
+        }
         return barrels;
     }
+
     @Override
     public Human[] fillArrayByHumans() {
-        Human[] humans;
-        Scanner scanner = new Scanner(System.in);
-            System.out.println("Введите количество создоваемых элементов");
-            humans = new Human[scanner.nextInt()];
-        for (int i = 0; i < humans.length; i++) {
-                director.createHuman(buildHuman);
-                humans[i] = buildHuman.createHuman();
-            }
-        return humans;
+        Human[] persons = new Human[arrayLength];
+
+        for (int i = 0; i < arrayLength; i++) {
+            persons[i] = userObjectGenerator.createHuman();
+        }
+        return persons;
     }
 }

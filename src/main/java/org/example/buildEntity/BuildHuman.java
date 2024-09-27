@@ -6,15 +6,22 @@ public class BuildHuman  {
     private String gender;
     private int age;
     private String surname;
-    public void setGender(String gender) {
+
+    public BuildHuman setGender(String gender) {
         this.gender = gender;
+        return this;
     }
-    public void setAge(int age) {
+
+    public BuildHuman setAge(int age) {
         this.age = age;
+        return this;
     }
-    public void setSurname(String surname) {
+
+    public BuildHuman setSurname(String surname) {
         this.surname = surname;
+        return this;
     }
+
     public Human createHuman() {
         return new Human(gender, age, surname);
     }
