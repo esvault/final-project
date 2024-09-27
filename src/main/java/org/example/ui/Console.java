@@ -59,7 +59,7 @@ public class Console {
                 fillArray();
                 return;
             }
-        };
+        }
 
         System.out.println("Введите тип элементов (1 - Animal, 2 - Barrel, 3 - Human)");
         int elementTypeCode;
@@ -150,6 +150,7 @@ public class Console {
             }
             case 5: {
                 state = ConsoleState.EXIT;
+                break;
             }
             default:
                 System.out.println("Нет такой команды");
