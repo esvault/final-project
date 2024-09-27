@@ -13,6 +13,7 @@ import org.example.entity.SupportedTypes;
 import org.example.enums.ConsoleState;
 import org.example.enums.ReturnCode;
 import org.example.model.*;
+import org.example.factory.*;
 
 import java.io.File;
 import java.util.Arrays;
@@ -135,33 +136,18 @@ public class Console {
     }
 
     private SupportedTypes askDataForBinSearch() {
+        ObjectFactory factory = new UserObjectFactory();
         SupportedTypes searchedElement;
-        System.out.print("Введите данные по объекту, который хотите найти");
+        System.out.println("Введите данные по объекту, который хотите найти");
         if (currentArray[0] instanceof Animal) {
-            BuildAnimal builder = new BuildAnimal();
-            builder.setSpecies(validateStringInput("Введите вид животного: "));
-            builder.setEyeColor(validateStringInput("Введите цвет глаз: "));
-            builder.setWool(validateBooleanInput("Есть ли шерсть? (да/нет): "));
-
-            searchedElement = builder.createAnimal();
+            searchedElement = factory.createAnimal();
         } else if (currentArray[0] instanceof Barrel) {
-            BuildBarrel builder = new BuildBarrel();
-            builder.setVolume(validateIntInput("Введите объем бочки (в литрах): "));
-            builder.setContent(validateStringInput("Введите хранимый материал: "));
-            builder.setMaterial(validateStringInput("Введите материал, из которого изготовлена бочка: "));
-
-            searchedElement = builder.createBarrel();
+            searchedElement = factory.createBarrel();
         } else if (currentArray[0] instanceof Human) {
-            BuildHuman builder = new BuildHuman();
-            builder.setGender(validateStringInput("Введите пол: "));
-            builder.setAge(validateIntInput("Введите возраст: "));
-            builder.setSurname(validateStringInput("Введите фамилию: "));
-
-            searchedElement = builder.createHuman();
+            searchedElement = factory.createHuman();
         } else {
             searchedElement = null;
         }
-
 
         return searchedElement;
     }
