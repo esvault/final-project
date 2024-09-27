@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.strategy;
 
 import org.example.entity.Animal;
 import org.example.entity.Barrel;

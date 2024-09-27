@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.strategy;
 
 import org.example.buildEntity.Director;
 import org.example.entity.Animal;

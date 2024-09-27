@@ -9,7 +9,7 @@ import org.example.entity.Barrel;
 import org.example.entity.Human;
 import org.example.entity.SupportedTypes;
 import org.example.buildEntity.UserObjectFactory;
-import org.example.model.*;
+import org.example.strategy.*;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
