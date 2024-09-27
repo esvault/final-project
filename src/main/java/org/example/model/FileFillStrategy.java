@@ -1,15 +1,16 @@
 package org.example.model;
 
-import org.example.buildEntity.BuildAnimal;
-import org.example.buildEntity.BuildBarrel;
-import org.example.buildEntity.BuildHuman;
+import org.example.director.Director;
 import org.example.entity.Animal;
 import org.example.entity.Barrel;
 import org.example.entity.Human;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.utils.Validator;
+
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,52 +19,81 @@ import java.util.List;
 //TODO Implement class
 public class FileFillStrategy implements FillStrategy {
     private File file;
+    private Director director = new Director();;
+
     public FileFillStrategy(File file)  {
         this.file = file;
     }
 
     @Override
     public Animal[] fillArrayByAnimals()  {
-        BuildAnimal builder = new BuildAnimal();
         var array = mapArrayFromJson();
-        Animal[] animals = new Animal[array.length];
-        for(int i=0;i<animals.length;i++){
+        ArrayList<Animal> animals= new ArrayList<>();
+
+        for(int i=0; i < array.length; i++){
             var temp = (LinkedHashMap<String,String>)array[i];
-            builder.setEyeColor(temp.get("eyeColor"));
-            builder.setSpecies(temp.get("species"));
-            builder.setWool(Boolean.parseBoolean(temp.get("wool")));
-            animals[i] = builder.createAnimal();
+            String species = temp.get("species");
+            String eyeColor = temp.get("eyeColor");
+            boolean wool = Boolean.parseBoolean(temp.get("wool"));
+
+            if(!Validator.containsOnlyLetters(species) ||
+                !Validator.containsOnlyLetters(eyeColor) ||
+                ! Validator.validateBoolean(String.valueOf(wool))){
+                continue;
+            }
+            else{
+                animals.add(director.createAnimal(species, eyeColor, wool));
+            }
         }
-        return animals;
+        Animal[] result = new Animal[animals.size()];
+        return animals.toArray(result);
     }
     @Override
     public Barrel[] fillArrayByBarrels() {
-        BuildBarrel builder = new BuildBarrel();
         var array = mapArrayFromJson();
-        Barrel[] barrels = new Barrel[array.length];
-        for(int i=0;i<barrels.length;i++){
+        ArrayList<Barrel> barrels= new ArrayList<>();
+
+        for(int i=0; i<array.length;i++){
             var temp = (LinkedHashMap)array[i];
-            builder.setVolume(Integer.parseInt(temp.get("volume").toString()));
-            builder.setContent(temp.get("content").toString());
-            builder.setMaterial(temp.get("material").toString());
-            barrels[i] = builder.createBarrel();
+            int volume = Integer.parseInt(temp.get("volume").toString());
+            String content = temp.get("content").toString();
+            String material = temp.get("material").toString();
+
+            if(!Validator.validateVolume(String.valueOf(volume)) ||
+                !Validator.containsOnlyLetters(content) ||
+                !Validator.containsOnlyLetters(material)){
+                continue;
+            }
+            else {
+                barrels.add(director.createBarrel(volume, content, material));
+            }
         }
-        return barrels;
+        Barrel[] result = new Barrel[barrels.size()];
+        return barrels.toArray(result);
     }
 
     @Override
     public Human[] fillArrayByHumans()  {
-        BuildHuman builder = new BuildHuman();
         var array = mapArrayFromJson();
-        Human[] humans = new Human[array.length];
-        for(int i=0;i<humans.length;i++){
+        ArrayList<Human> humans = new ArrayList<>();
+
+        for(int i=0; i<array.length; i++){
             var temp = (LinkedHashMap)array[i];
-            builder.setGender(temp.get("gender").toString());
-            builder.setAge(Integer.parseInt(temp.get("age").toString()));
-            builder.setSurname(temp.get("surname").toString());
-            humans[i] = builder.createHuman();
+            String gender = temp.get("gender").toString();
+            int age = Integer.parseInt(temp.get("age").toString());
+            String surname = temp.get("surname").toString();
+
+            if(!Validator.containsOnlyLetters(gender) ||
+                !Validator.validateAge(String.valueOf(age)) ||
+                !Validator.validateSurname(surname)){
+                continue;
+            }
+            else{
+                humans.add(director.createHuman(gender, age, surname)) ;
+            }
         }
-        return humans;
+        Human[] result= new Human[humans.size()];
+        return humans.toArray(result);
     }
 
     private Object[] mapArrayFromJson() {
