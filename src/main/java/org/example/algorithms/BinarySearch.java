@@ -3,10 +3,6 @@ package org.example.algorithms;
 //TODO Implement class
 public class BinarySearch {
     public static <T extends Comparable<T>> int search(T[] array, T key) {
-        // Перед бинарным поиском нужно отсортировать массив
-        SortingStrategy<T> ss = new InsertionSort<>();
-        ss.sort(array);
-
         int left = 0;
         int right = array.length - 1;
 
