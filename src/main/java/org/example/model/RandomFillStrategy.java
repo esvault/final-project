@@ -51,6 +51,7 @@ public class RandomFillStrategy implements FillStrategy {
 
         for (int i = 0; i < arrayLength; i++) {
             humans[i] = randomObjectGenerator.createHuman();
+
         }
 
         return humans;

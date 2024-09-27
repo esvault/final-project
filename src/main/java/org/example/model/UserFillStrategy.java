@@ -23,6 +23,7 @@ public class UserFillStrategy implements FillStrategy {
         return scanner.nextInt();
     }
 
+
     @Override
     public Animal[] fillArrayByAnimals() {
         Animal[] animals = new Animal[arrayLength];

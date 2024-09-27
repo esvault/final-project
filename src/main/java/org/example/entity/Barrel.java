@@ -1,7 +1,7 @@
 package org.example.entity;
 
 //TODO Implement class
-public class Barrel implements Comparable<Barrel>, SupportedTypes {
+public class Barrel implements SupportedTypes {
     private final int volume;
     private final String content;
     private final String material;
@@ -25,14 +25,15 @@ public class Barrel implements Comparable<Barrel>, SupportedTypes {
     }
 
     @Override
-    public int compareTo(Barrel o) {
-        if (volume != o.volume) {
-            return volume - o.volume;
+    public int compareTo(Object o) {
+        Barrel other = (Barrel) o;
+        if (volume != other.volume) {
+            return volume - other.volume;
         }
-        if (content.equals(o.content)) {
-            return content.compareTo(o.content);
+        if (!content.equals(other.content)) {
+            return content.compareTo(other.content);
         }
-        return material.compareTo(o.material);
+        return material.compareTo(other.material);
     }
 
     @Override
